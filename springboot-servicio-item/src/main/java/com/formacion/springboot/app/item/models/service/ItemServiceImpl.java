@@ -21,7 +21,7 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public List<Item> findAll() {
-		List<Producto> productos = Arrays.asList(clienteRest.getForObject("http://localhost:9080/listar", Producto[].class));
+		List<Producto> productos = Arrays.asList(clienteRest.getForObject("http://servicio-productos/listar", Producto[].class));
 		return productos
 				.stream()
 				.map(producto -> new Item(producto, 1))
@@ -33,7 +33,7 @@ public class ItemServiceImpl implements ItemService {
 		
 		Map<String, String> pathVariables = new HashMap<String, String>();
 		pathVariables.put("id", id.toString());
-		Producto producto = clienteRest.getForObject("http://localhost:9080/ver/{id}", Producto.class, pathVariables);
+		Producto producto = clienteRest.getForObject("http://servicio-productos/ver/{id}", Producto.class, pathVariables);
 		
 		return new Item(producto, cantidad);
 	}
