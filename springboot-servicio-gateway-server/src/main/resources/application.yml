@@ -7,10 +7,15 @@ spring:
         predicates:
          - Path=/api/productos/**
         filters:
-         - StripPrefix=2
+          - StripPrefix=2
+          - EjemploCookie=Hola mi mensaje personalizado, usuario, AndresGuzman
       - id: servicio-item
         uri: lb://servicio-item
         predicates:
-         - Path=/api/items/**
+          - Path=/api/items/**
         filters:
-         - StripPrefix=2
+          - StripPrefix=2
+          - AddRequestHeader=token-request, 123456
+          - AddRequestHeader=token-response, 654321
+          - SetResponseHeader=Content-Type, text/plain
+          - AddRequestParameter=nombre, andres
