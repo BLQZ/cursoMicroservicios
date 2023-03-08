@@ -8,4 +8,4 @@ spring:
       server:
         git:
           uri: file:///C:/Users/0016248/repositoriosGit/cursoMicroservicios
-          default-label: main
+          #default-label: main
