@@ -7,7 +7,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/BLQZ/cursoMicroservicios.git
+          uri: https://github.com/BLQZ/cursoMicroservicios
           deleteUntrackedBranches: true
           default-label: main
           force-pull: false
