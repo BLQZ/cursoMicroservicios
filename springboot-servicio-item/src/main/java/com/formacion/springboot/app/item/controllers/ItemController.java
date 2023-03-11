@@ -47,7 +47,7 @@ public class ItemController {
 	private CircuitBreakerFactory cbFactory;
 	
 	@Autowired
-	@Qualifier("serviceRestTemplate")
+	@Qualifier("serviceFeign")
 	private ItemService itemService;
 	
 	@Value("${configuracion.texto}")

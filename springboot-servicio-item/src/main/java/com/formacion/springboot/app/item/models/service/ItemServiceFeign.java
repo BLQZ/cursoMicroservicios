@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.formacion.springboot.app.item.clientes.ProductoClienteRest;
@@ -12,7 +11,6 @@ import com.formacion.springboot.app.item.models.Item;
 import com.formacion.springboot.app.item.models.Producto;
 
 @Service("serviceFeign")
-//@Primary
 public class ItemServiceFeign implements ItemService {
 	
 	@Autowired
@@ -33,20 +31,17 @@ public class ItemServiceFeign implements ItemService {
 
 	@Override
 	public Producto save(Producto producto) {
-		// TODO Auto-generated method stub
-		return null;
+		return clienteFeign.crear(producto);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+		clienteFeign.eliminar(id);
 	}
 
 	@Override
 	public Producto update(Producto producto, Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return clienteFeign.update(producto, id);
 	}
 
 }
