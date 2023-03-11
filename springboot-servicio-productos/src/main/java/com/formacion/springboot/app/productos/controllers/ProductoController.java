@@ -1,7 +1,6 @@
 package com.formacion.springboot.app.productos.controllers;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.formacion.springboot.app.productos.models.entity.Producto;
+import com.formacion.springboot.app.commons.models.entity.Producto;
 import com.formacion.springboot.app.productos.models.service.IProductoService;
 
 @RestController
