@@ -27,27 +27,35 @@ public class UsuarioService implements IUsuarioService, UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Usuario usuario = client.findByUsername(username);
 		
-		if(usuario == null) {
+		try {
+			Usuario usuario = client.findByUsername(username);
+			
+			List<GrantedAuthority> authorities = usuario.getRoles()
+					.stream()
+					.map(role -> new SimpleGrantedAuthority(role.getNombre()))
+					.peek(authority -> log.info("Role: " + authority.getAuthority()))
+					.collect(Collectors.toList());
+			
+			
+			return new User(usuario.getUsername(), usuario.getPassword(), usuario.isEnabled(), true,
+					true, true, authorities);
+			
+		} catch (Exception e) {
+
 			log.error("Error en el login, no existe el usuario " + username);
 			throw new UsernameNotFoundException("Error en el login, no existe el usuario " + username);
 		}
-		
-		List<GrantedAuthority> authorities = usuario.getRoles()
-				.stream()
-				.map(role -> new SimpleGrantedAuthority(role.getNombre()))
-				.peek(authority -> log.info("Role: " + authority.getAuthority()))
-				.collect(Collectors.toList());
-		
-		
-		return new User(usuario.getUsername(), usuario.getPassword(), usuario.isEnabled(), true,
-				true, true, authorities);
 	}
 
 	@Override
 	public Usuario findByUsername(String username) {
 		return client.findByUsername(username);
+	}
+
+	@Override
+	public Usuario update(Usuario usuario, Long id) {
+		return client.update(usuario, id);
 	}
 
 }
